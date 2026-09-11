@@ -1,0 +1,16 @@
+services:
+  ember:
+    build: .
+    restart: unless-stopped
+    # Bind to loopback on the host; put a TLS reverse proxy or VPN in front for remote agents.
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      EMBER_MAX_CLAIMS_PER_ACTOR: "3"
+      EMBER_CLAIM_TTL_MINUTES: "90"
+      # EMBER_ALLOWED_HOSTS: "ember.internal"
+    volumes:
+      - ember-data:/data
+
+volumes:
+  ember-data:
